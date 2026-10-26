@@ -1,0 +1,144 @@
+/* extras.css — timeline, contact, footer, multi-page pieces and responsive rules. */
+
+/* 8. Timeline ------------------------------------------------------------ */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px;
+  background: linear-gradient(var(--accent), var(--accent-2)); opacity: .45; border-radius: 2px;
+}
+.timeline li { position: relative; padding: 0 0 2.2rem 0; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before {
+  content: ""; position: absolute; left: -2rem; top: .5rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); border: 3px solid var(--accent);
+}
+.section-alt .timeline li::before { background: var(--bg-alt); }
+.when { font: 600 .8rem/1 ui-monospace, monospace; color: var(--accent-2); letter-spacing: .04em; }
+.what h3 { margin: .5rem 0 .35rem; }
+.what .at { color: var(--text-dim); font-weight: 500; }
+.what p { color: var(--text-dim); font-size: .95rem; margin: 0; max-width: 44rem; }
+
+.subhead { margin: 3.2rem 0 1.3rem; font-size: 1.05rem; }
+.awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.awards-grid h3 { font-size: 1rem; }
+.awards-grid p { margin: 0; color: var(--text-dim); font-size: .92rem; }
+
+/* 9. Contact ------------------------------------------------------------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.contact-list { display: grid; gap: .8rem; margin-top: 1.5rem; }
+.contact-list li { display: flex; align-items: center; gap: .8rem; color: var(--text-dim); }
+.contact-list .ico {
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--accent-2);
+}
+.contact-list a:hover { color: var(--accent-2); }
+
+.contact-form {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.7rem; display: grid; gap: 1rem;
+}
+.field { display: grid; gap: .4rem; }
+.field label { font-size: .85rem; font-weight: 600; color: var(--text-dim); }
+.field input, .field textarea {
+  width: 100%; padding: .78rem .9rem; border-radius: var(--radius-sm);
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
+  font: inherit; font-size: .95rem; resize: vertical;
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #f87171; }
+.form-note { margin: 0; font-size: .9rem; color: var(--text-dim); min-height: 1.2em; }
+.form-note.ok { color: #34d399; }
+.form-note.err { color: #f87171; }
+
+/* 10. Footer ------------------------------------------------------------- */
+.site-footer { border-top: 1px solid var(--border); padding: 1.8rem 0; }
+.footer-inner { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+.footer-inner p { margin: 0; font-size: .88rem; color: var(--text-dim); }
+
+/* 10b. Multi-page pieces ------------------------------------------------- */
+/* Compact banner used at the top of every inner page. */
+.page-hero {
+  position: relative; overflow: hidden;
+  padding: clamp(2.8rem, 6vw, 4.2rem) 0 clamp(2.2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--border);
+}
+.page-hero .hero-bg { opacity: .75; }
+.page-hero .orb { filter: blur(70px); }
+.page-hero > .wrap { position: relative; z-index: 1; }
+.page-hero h1 { font-size: clamp(1.85rem, 4.4vw, 2.7rem); margin-bottom: .35em; }
+.page-hero .lede { margin-bottom: 0; }
+
+/* Entry links back to the inner pages, shown on the home page. */
+.explore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; }
+.explore-card { display: flex; flex-direction: column; gap: .6rem; }
+.explore-card .ico { font-size: 1.1rem; color: var(--accent-2); }
+.explore-card p { margin: 0; color: var(--text-dim); font-size: .93rem; }
+.explore-card .text-link { margin-top: auto; padding-top: .6rem; }
+
+/* Bulleted detail lists inside project cards. */
+.bullets { display: grid; gap: .45rem; }
+.bullets li { position: relative; padding-left: 1.15rem; font-size: .92rem; color: var(--text-dim); }
+.bullets li::before {
+  content: ""; position: absolute; left: 0; top: .58em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2);
+}
+
+/* Closing call to action. */
+.cta-band { background: var(--bg-alt); border-top: 1px solid var(--border); }
+.cta-inner { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; justify-content: space-between; }
+.cta-inner h2 { margin: 0 0 .3rem; }
+.cta-inner .lede { margin: 0; }
+
+/* Reveal on scroll ------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* 11. Responsive --------------------------------------------------------- */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; margin-bottom: 1rem; }
+  .avatar-card { width: min(100%, 320px); }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* Six nav items need more room, so the menu collapses earlier. */
+@media (max-width: 900px) {
+  .hide-sm { display: none; }
+  .menu-btn { display: grid; }
+
+  .nav {
+    position: fixed; inset: 72px 0 auto 0; left: 0;
+    flex-direction: column; gap: 0;
+    background: var(--bg); border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: .5rem 22px 1.4rem;
+    transform: translateY(-140%); transition: transform .35s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .nav.open { transform: none; }
+  .nav a { padding: .9rem 0; border-bottom: 1px solid var(--border); font-size: 1rem; }
+  .nav a:last-child { border-bottom: 0; }
+  .nav a::after { display: none; }
+}
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+  .cta-inner { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 420px) {
+  .brand-text { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
